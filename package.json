@@ -1,0 +1,37 @@
+{
+  "name": "hane-theme-simple",
+  "version": "0.2.0",
+  "description": "A simple theme for hanejs.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hanejs/hane-theme-simple.git"
+  },
+  "keywords": [
+    "hane",
+    "hanejs",
+    "theme",
+    "react",
+    "simple"
+  ],
+  "author": "tengattack",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hanejs/hane-theme-simple/issues"
+  },
+  "homepage": "https://github.com/hanejs/hane-theme-simple#readme",
+  "dependencies": {
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-preset-es2017-node7": "^0.4.1",
+    "babel-preset-react": "^6.16.0",
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
+  }
+}
