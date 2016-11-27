@@ -4,7 +4,9 @@
   "description": "A simple theme for hanejs.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint": "eslint --ext .es ./src",
+    "watch": "babel src/ --watch --out-dir lib/",
+    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register "
   },
   "repository": {
     "type": "git",
@@ -28,10 +30,15 @@
     "react-dom": "^15.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-preset-es2017-node7": "^0.4.1",
     "babel-preset-react": "^6.16.0",
-    "mocha": "^3.1.2",
+    "eslint": "^3.11.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "mocha": "^3.2.0",
     "should": "^11.1.1"
   }
 }

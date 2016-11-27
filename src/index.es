@@ -1,9 +1,26 @@
+import ReactDOMServer from 'react-dom/server'
+import React from 'react'
 
-if (!global.hane) {
-  console.error('Please require in hanejs.')
-  process.exit(1)
+import Layout from './components/layout'
+
+global.hane = {}
+hane.Theme = class {
+  constructor () {
+    this.config = {
+      title: 'hanejs'
+    }
+  }
 }
 
 class SimpleTheme extends hane.Theme {
-  
+  render () {
+    let html = ReactDOMServer.renderToString(
+      React.createElement(Layout, this.config)
+    )
+
+    console.log(html)
+  }
 }
+
+let theme = new SimpleTheme()
+theme.render()
