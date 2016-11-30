@@ -1,10 +1,8 @@
 import React from 'react'
 
-class Layout extends React.Component {
-  constructor (props) {
-    super(props)
-  }
+import Content from './content'
 
+class Layout extends React.Component {
   componentWillMount () {
     //
   }
@@ -15,6 +13,12 @@ class Layout extends React.Component {
         <head>
           <title>{this.props.title}</title>
         </head>
+        <body>
+        {this.props.item.slice(0, 10).map((item, i) => {
+          return <Content key={i} {...item} />
+        })}
+        <Content />
+        </body>
       </html>
     )
   }
