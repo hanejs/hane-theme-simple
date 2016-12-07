@@ -14,10 +14,9 @@ class Layout extends React.Component {
           <title>{this.props.title}</title>
         </head>
         <body>
-        {this.props.item.slice(0, 10).map((item, i) => {
+        {this.props.item.slice(120, 140).map((item, i) => {
           return <Content key={i} {...item} />
         })}
-        <Content />
         </body>
       </html>
     )
