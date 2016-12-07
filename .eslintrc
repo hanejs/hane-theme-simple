@@ -1,0 +1,15 @@
+{
+    "extends": "standard",
+    "plugins": [
+        "react",
+        "standard",
+        "promise"
+    ],
+    "rules": {
+        "react/jsx-uses-react": 1,
+        "react/jsx-uses-vars": 1,
+    },
+    "globals": {
+        "hane": true
+    }
+}

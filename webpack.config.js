@@ -1,4 +1,4 @@
-var path = require("path"),
+var path = require('path'),
   webpack = require('webpack');
 
 module.exports = {
@@ -19,6 +19,14 @@ module.exports = {
         test: /\.es$/,
         exclude: /(node_modules|bower_components)/,
         loaders: ['react-hot', 'babel']
+      },
+      {
+        test: /\.less$/,
+        loader: 'style-loader!css-loader!less-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
   },
