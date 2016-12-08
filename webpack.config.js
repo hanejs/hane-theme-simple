@@ -1,5 +1,8 @@
 var path = require('path'),
-  webpack = require('webpack');
+  webpack = require('webpack'),
+  ExtractTextPlugin = require('extract-text-webpack-plugin'),
+
+  extractLessPlugin = new ExtractTextPlugin('style.css');
 
 module.exports = {
   entry: [
@@ -22,15 +25,12 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        loader: 'style-loader!css-loader!less-loader'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loaders: extractLessPlugin.extract(['css', 'less'])
       }
     ]
   },
   plugins: [
+    extractLessPlugin,
     new webpack.HotModuleReplacementPlugin()
   ]
 };
