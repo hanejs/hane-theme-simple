@@ -6,8 +6,9 @@
   "scripts": {
     "eslint": "eslint --ext .es ./src",
     "watch": "babel src/ --watch --out-dir lib/",
+    "build": "babel src/ --out-dir lib/ && lessc src/style.less > lib/style.css",
     "server": "node build/app.js",
-    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register "
+    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,7 @@
     "react",
     "simple"
   ],
-  "author": "tengattack",
+  "author": "hanejs <https://github.com/hanejs>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hanejs/hane-theme-simple/issues"
@@ -42,6 +43,7 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-react": "^6.8.0",
     "eslint-plugin-standard": "^2.0.1",
+    "extract-text-webpack-plugin": "^1.0.1",
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",

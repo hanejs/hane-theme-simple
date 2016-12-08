@@ -1,7 +1,5 @@
 import React from 'react'
 
-require('./../style.less')
-
 class Header extends React.Component {
   componentWillMount () {
     //
@@ -9,14 +7,13 @@ class Header extends React.Component {
 
   render () {
     return (
-      <head>
-        <meta charset="utf-8" />
-        <title>hanejs</title>
-        <meta name="viewport" content="width=device-width, user-scalable=no" />
-        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-        <link rel="shortcut icon" href="favicon.ico" />
-
-      </head>
+      <header className="site-header">
+        <div className="site-header-main">
+          <div className="site-branding">
+            <h1 className="site-title">hanejs</h1>
+          </div>
+        </div>
+      </header>
     )
   }
 }

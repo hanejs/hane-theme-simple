@@ -1,24 +1,43 @@
 import React from 'react'
 
-class Content extends React.Component {
+import Article from './article'
+
+class IndexContent extends React.Component {
   constructor (props) {
     super(props)
-    this.title = this.props.title || ''
-    this.content = this.props.content || ''
-  }
-  componentWillMount () {
-    //
+    this.state = {
+      items: this.props.item || []
+    }
   }
 
   render () {
     return (
-      <article>
-        <h3>{this.title}</h3>
-        <p>{this.content}</p>
-      </article>
+    <main className="site-main">
+      {this.state.items.map((item, i) => {
+        return <Article key={i} {...item} />
+      })}
+    </main>
     )
   }
 }
 
-export default Content
+class ItemContent extends React.Component {
+  constructor (props) {
+    super(props)
+    let items = this.props.item || []
+    this.state = {
+      item: items.pop() || {}
+    }
+  }
+
+  render () {
+    return (
+      <main className="site-main">
+        <Article {...this.state.item} />
+      </main>
+    )
+  }
+}
+
+export {IndexContent, ItemContent}
 

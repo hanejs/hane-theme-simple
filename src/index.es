@@ -2,43 +2,46 @@ import ReactDOMServer from 'react-dom/server'
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-import Header from './components/header'
+import Metadata from './components/metadata'
 import Layout from './components/layout'
-import Footer from './components/footer'
 
 global.hane = {}
 hane.Theme = class {
   constructor (data) {
     this.config = {}
     this.data = data || {}
-    this.layout = 'index'
+    this.initialContentType = 'index'
   }
   _format (data) {
     return data
   }
-  getHeader (options = {}) {
-    return React.createElement(Header, this.data)
+  getMetadata (options = {}) {
+    return React.createElement(Metadata, this.data)
   }
   getLayout (options = {}) {
-    return React.createElement(Layout, this.data)
+    return React.createElement(Layout, this)
   }
-  getFooter (options = {}) {
-    return React.createElement(Footer, this.data)
+  setContenType (v) {
+    this.initialContentType = v
   }
-
 }
 
 class SimpleTheme extends hane.Theme {
-  constructor (data) {
+  constructor (data, options = {}) {
     super(data)
+  }
 
+  render (initialContentType) {
+    this.setContenType(initialContentType)
     return (
       <html>
-        {this.getHeader()}
+        {this.getMetadata()}
+        <body>
         {this.getLayout()}
-        {this.getFooter()}
+        </body>
       </html>
     )
   }
 }
 
+export default SimpleTheme
