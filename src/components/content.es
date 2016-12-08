@@ -6,7 +6,7 @@ class IndexContent extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      items: this.props.item || []
+      items: this.props.data || []
     }
   }
 
@@ -24,7 +24,7 @@ class IndexContent extends React.Component {
 class ItemContent extends React.Component {
   constructor (props) {
     super(props)
-    let items = this.props.item || []
+    let items = this.props.data || []
     this.state = {
       item: items.pop() || {}
     }

@@ -12,11 +12,8 @@ hane.Theme = class {
     this.data = data || {}
     this.initialContentType = 'index'
   }
-  _format (data) {
-    return data
-  }
   getMetadata (options = {}) {
-    return React.createElement(Metadata, this.data)
+    return React.createElement(Metadata)
   }
   getLayout (options = {}) {
     return React.createElement(Layout, this)
@@ -31,8 +28,9 @@ class SimpleTheme extends hane.Theme {
     super(data)
   }
 
-  render (initialContentType) {
+  render (initialContentType = 'index') {
     this.setContenType(initialContentType)
+
     return (
       <html>
         {this.getMetadata()}

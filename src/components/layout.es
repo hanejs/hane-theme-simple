@@ -9,20 +9,24 @@ class Layout extends React.Component {
     let data = theme.data || {}
     this.state = {
       contentType: theme.initialContentType,
-      categories: data['wp:category'] || [],
-      tags: data['wp:tag'] || []
+      contentData: data['items'] || [],
+      categories: data['categories'] || [],
+      tags: data['tags'] || []
     }
   }
 
   getContent () {
-    let reactElement
+    let reactElement,
+      props = {
+        data: this.state.contentData
+      }
     switch (this.state.contentType) {
       case 'item':
-        reactElement = React.createElement(ItemContent, {...this.state.data})
+        reactElement = React.createElement(ItemContent, props)
         break
       case 'index':
       default:
-        reactElement = React.createElement(IndexContent, {...this.state.data})
+        reactElement = React.createElement(IndexContent, props)
     }
     return reactElement
   }

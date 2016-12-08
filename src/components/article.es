@@ -4,7 +4,7 @@ class Article extends React.Component {
   constructor (props) {
     super(props)
     this.title = this.props.title || ''
-    this.content = this.props['content:encoded'] || ''
+    this.content = this.props.content || ''
   }
   componentWillMount () {
     //
