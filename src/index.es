@@ -28,10 +28,12 @@ class SimpleTheme extends hane.Theme {
     super(data)
   }
 
-  render (initialContentType = 'index') {
+  render (initialContentType = 'index', callback = (element) => {
+    return ReactDOMServer.renderToString(element)
+  }) {
     this.setContenType(initialContentType)
 
-    return (
+    return callback(
       <html>
         {this.getMetadata()}
         <body>
