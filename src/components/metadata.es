@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Header extends React.Component {
+class Metadata extends React.Component {
   componentWillMount () {
     //
   }
@@ -19,4 +19,4 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+export default Metadata
