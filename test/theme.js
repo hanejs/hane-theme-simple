@@ -2,8 +2,8 @@ import assert from 'assert'
 import faker from 'faker'
 import jsdom from 'jsdom'
 
-import '../../hane'
-import '../lib/index'
+import '../../hane/lib/default'
+import '../lib'
 
 const theme = hane.runtime.theme
 
