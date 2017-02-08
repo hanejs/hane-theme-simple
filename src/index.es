@@ -5,35 +5,26 @@ import React from 'react'
 import Metadata from './components/metadata'
 import Layout from './components/layout'
 
-global.hane = {}
-hane.Theme = class {
-  constructor (data) {
-    this.config = {}
-    this.data = data || {}
-    this.initialContentType = 'index'
-  }
-  getMetadata (options = {}) {
-    return React.createElement(Metadata)
-  }
-  getLayout (options = {}) {
-    return React.createElement(Layout, this)
-  }
-  setContenType (v) {
-    this.initialContentType = v
-  }
+if (!global.hane) {
+  console.error('Please require in hanejs.')
+  process.exit(1)
 }
 
 class SimpleTheme extends hane.Theme {
-  constructor (data, options = {}) {
-    super(data)
+  constructor(options = {}) {
+    super(options)
   }
-
-  render (initialContentType = 'index', callback = (element) => {
-    return ReactDOMServer.renderToString(element)
-  }) {
+  getMetadata(options = {}) {
+    return React.createElement(Metadata)
+  }
+  getLayout(options = {}) {
+    return React.createElement(Layout, this)
+  }
+  render(data, initialContentType = 'index') {
+    this.data = data
     this.setContenType(initialContentType)
 
-    return callback(
+    return ReactDOMServer.renderToString(
       <html>
         {this.getMetadata()}
         <body>
@@ -44,4 +35,4 @@ class SimpleTheme extends hane.Theme {
   }
 }
 
-export default SimpleTheme
+hane.Theme.register(SimpleTheme)
