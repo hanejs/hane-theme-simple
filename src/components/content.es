@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import Article from './article'
 
-class IndexContent extends React.Component {
+export class IndexContent extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -11,23 +11,35 @@ class IndexContent extends React.Component {
   }
 
   render () {
+    const { prevUrl, nextUrl } = this.props
+    const { items } = this.state
     return (
-    <main className="site-main">
-      {this.state.items.map((item, i) => {
-        return <Article key={i} {...item} />
-      })}
-    </main>
+      <main className="site-main">
+        {items.map((item, i) => {
+          return <Article key={i} {...item} index={true} />
+        })}
+        <ul className="pagination">
+          {prevUrl &&
+            <li title="Prev Page">
+              <a href={prevUrl}>Prev Page</a>
+            </li>
+          }
+          {nextUrl &&
+            <li title="Next Page">
+              <a href={nextUrl}>Next Page</a>
+            </li>
+          }
+        </ul>
+      </main>
     )
   }
 }
 
-class ItemContent extends React.Component {
+export class ItemContent extends Component {
   constructor (props) {
     super(props)
-    let items = this.props.data || []
-    this.state = {
-      item: items.pop() || {}
-    }
+    const item = this.props.data || {}
+    this.state = { item }
   }
 
   render () {
@@ -38,6 +50,3 @@ class ItemContent extends React.Component {
     )
   }
 }
-
-export {IndexContent, ItemContent}
-

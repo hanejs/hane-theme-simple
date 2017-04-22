@@ -1,22 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class Article extends React.Component {
+export default class Article extends Component {
   constructor (props) {
     super(props)
-    this.title = this.props.title || ''
-    this.content = this.props.content || ''
   }
   componentWillMount () {
     //
   }
 
   render () {
+    const { index, url, title } = this.props
     return (
       <article>
         <header className="entry-header">
-          <h2 className="entry-title">{this.title}</h2>
+          <a href={url}>
+            <h2 className="entry-title">{title}</h2>
+          </a>
         </header>
-        <div className="entry-content" dangerouslySetInnerHTML={{__html: this.content}}></div>
+        <div className="entry-content"
+             dangerouslySetInnerHTML={{ __html: index ? this.props.shortContent : this.props.content }}>
+        </div>
+        {index &&
+          <a href={url}>...Read More</a>
+        }
         <footer className="entry-footer">
           <span className="posted-on">
             <time dateTime={this.props.pubDate}>{this.props.pubDate}</time>
@@ -26,6 +32,3 @@ class Article extends React.Component {
     )
   }
 }
-
-export default Article
-

@@ -1,6 +1,8 @@
-import ReactDOMServer from 'react-dom/server'
-import ReactDOM from 'react-dom'
+
 import React from 'react'
+import ReactDOM from 'react-dom'
+import ReactDOMServer from 'react-dom/server'
+import htmlBeautify from 'html-beautify'
 
 import Metadata from './components/metadata'
 import Layout from './components/layout'
@@ -10,21 +12,28 @@ if (!global.hane) {
   process.exit(1)
 }
 
+const beautifyOpts = {
+  indent_size: 2,
+  preserve_newlines: false,
+  space_after_anon_function: true,
+  extra_liners: [],
+}
+
 class SimpleTheme extends hane.Theme {
   constructor(options = {}) {
     super(options)
   }
-  getMetadata(options = {}) {
-    return React.createElement(Metadata)
+  getMetadata(data) {
+    return <Metadata />
   }
-  getLayout(options = {}) {
-    return React.createElement(Layout, this)
+  getLayout(data) {
+    return <Layout data={this.data} contentType={this.initialContentType} />
   }
-  render(data, initialContentType = 'index') {
+  render(data, contentType = 'index') {
     this.data = data
-    this.setContenType(initialContentType)
+    this.setContenType(contentType)
 
-    return ReactDOMServer.renderToString(
+    let html = ReactDOMServer.renderToString(
       <html>
         {this.getMetadata()}
         <body>
@@ -32,6 +41,9 @@ class SimpleTheme extends hane.Theme {
         </body>
       </html>
     )
+    html = '<!DOCTYPE html>' + html
+    //html = htmlBeautify(html, beautifyOpts)
+    return html
   }
 }
 

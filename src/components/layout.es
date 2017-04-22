@@ -4,34 +4,45 @@ import Header from './header'
 import {IndexContent, ItemContent} from './content'
 
 class Layout extends React.Component {
-  constructor (theme) {
-    super(theme)
-    let data = theme.data || {}
+  constructor(props) {
+    super(props)
+    let data = props.data || {}
     this.state = {
-      contentType: theme.initialContentType,
-      contentData: data['items'] || [],
+      contentType: props.contentType,
+      posts: data['posts'] || [],
       categories: data['categories'] || [],
-      tags: data['tags'] || []
+      tags: data['tags'] || [],
+    }
+    switch (this.state.contentType) {
+    case 'item':
+      this.state.contentData = data['post']
+      break
+    case 'index':
+      this.state.contentData = this.state.posts
+      this.state.nextUrl = data['nextUrl']
+      this.state.prevUrl = data['prevUrl']
+      break
     }
   }
 
   getContent () {
-    let reactElement,
-      props = {
-        data: this.state.contentData
-      }
+    let reactElement
+    const { contentData } = this.state
     switch (this.state.contentType) {
       case 'item':
-        reactElement = React.createElement(ItemContent, props)
+        reactElement = <ItemContent data={contentData} />
         break
       case 'index':
-      default:
-        reactElement = React.createElement(IndexContent, props)
+        reactElement = <IndexContent data={contentData}
+                                     prevUrl={this.state.prevUrl}
+                                     nextUrl={this.state.nextUrl} />
+        break
     }
     return reactElement
   }
 
   render () {
+    const { categories, tags } = this.state
     return (
       <div className="site">
         <div className="site-inner">
@@ -41,19 +52,21 @@ class Layout extends React.Component {
               {this.getContent()}
             </div>
             <aside className="sidebar">
-              <section className="widget">
-                <h2 className="widget-title">Categories</h2>
-                <ul>
-                {this.state.categories.map((category, i) => {
-                  return <li key={i}>{category['wp:cat_name']}</li>
-                })}
-                </ul>
-              </section>
+              {categories.length > 0 &&
+                <section className="widget">
+                  <h2 className="widget-title">Categories</h2>
+                  <ul>
+                  {categories.map((category, i) => {
+                    return <li key={i}>{category['name']}</li>
+                  })}
+                  </ul>
+                </section>
+              }
               <section className="widget">
                 <h2 className="widget-title">Tags</h2>
                 <ul>
-                {this.state.tags.map((category, i) => {
-                  return <li key={i}>{category['wp:tag_name']}</li>
+                {tags.map((tag, i) => {
+                  return <li key={i}>{tag['name']}</li>
                 })}
                 </ul>
               </section>
