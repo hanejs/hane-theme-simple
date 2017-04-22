@@ -24,7 +24,7 @@ class SimpleTheme extends hane.Theme {
     super(options)
   }
   getHead(data) {
-    return <Head />
+    return <Head title={this.data.title} />
   }
   getLayout(data) {
     return <Layout data={this.data} contentType={this.initialContentType} />
