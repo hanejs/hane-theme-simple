@@ -17,6 +17,9 @@ export default class Article extends Component {
           <a href={url}>
             <h2 className="entry-title">{title}</h2>
           </a>
+          <span className="posted-on">
+            <time dateTime={createTime}>{ moment(createTime).format('LLLL') }</time>
+          </span>
         </header>
         <div className="entry-content"
              dangerouslySetInnerHTML={{ __html: index ? this.props.shortContent : this.props.content }}>
@@ -24,11 +27,10 @@ export default class Article extends Component {
         {index &&
           <a href={url}>...Read More</a>
         }
-        <footer className="entry-footer">
-          <span className="posted-on">
-            <time dateTime={createTime}>{ moment(createTime).format('LLLL') }</time>
-          </span>
-        </footer>
+        {/*
+          <footer className="entry-footer">
+          </footer>
+        */}
       </article>
     )
   }

@@ -8,6 +8,7 @@ class Layout extends React.Component {
     super(props)
     let data = props.data || {}
     this.state = {
+      blog: data['blog'] || {},
       contentType: props.contentType,
       posts: data['posts'] || [],
       categories: data['categories'] || [],
@@ -42,11 +43,11 @@ class Layout extends React.Component {
   }
 
   render () {
-    const { categories, tags } = this.state
+    const { categories, tags, blog } = this.state
     return (
       <div className="site">
         <div className="site-inner">
-          <Header />
+          <Header blog={blog} />
           <div className="site-content">
             <div className="content-area">
               {this.getContent()}

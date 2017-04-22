@@ -5,11 +5,11 @@ export default class Head extends React.Component {
     //
   }
   render() {
-    const { title } = this.props
+    const { title, blog } = this.props
     return (
       <head>
         <meta charSet="utf-8" />
-        <title>{ title } - hanejs</title>
+        <title>{ title } - { blog.name }</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="generator" content="hanejs" />

@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-class Header extends React.Component {
-  componentWillMount () {
+export default class Header extends Component {
+  componentWillMount() {
     //
   }
-
-  render () {
+  render() {
+    const { blog } = this.props
     return (
       <header className="site-header">
         <div className="site-header-main">
           <div className="site-branding">
-            <h1 className="site-title">hanejs</h1>
+            <a href={blog.publicUrl} title={blog.name}>
+              <h1 className="site-title">{ blog.name }</h1>
+            </a>
           </div>
         </div>
       </header>
     )
   }
 }
-
-export default Header
