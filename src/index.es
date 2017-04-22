@@ -2,7 +2,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
-import htmlBeautify from 'html-beautify'
+import beautify from 'js-beautify'
+import sanitizeHtml from 'sanitize-html'
 
 import Head from './components/head'
 import Layout from './components/layout'
@@ -41,8 +42,31 @@ class SimpleTheme extends hane.Theme {
         </body>
       </html>
     )
-    html = '<!DOCTYPE html>' + html
-    //html = htmlBeautify(html, beautifyOpts)
+    html = sanitizeHtml(html, {
+      allowedTags: false,
+      allowedAttributes: false,
+      transformTags: {
+        '*': function (tagName, attribs) {
+          const removeKeys = []
+          for (const key in attribs) {
+            if (key.startsWith('data-react')) {
+              removeKeys.push(key)
+            }
+          }
+          if (removeKeys.length > 0) {
+            removeKeys.forEach(k => {
+              delete attribs[k]
+            })
+          }
+          return {
+            tagName,
+            attribs,
+          }
+        }
+      }
+    })
+    html = beautify.html(html, beautifyOpts)
+    html = '<!DOCTYPE html>\n' + html
     return html
   }
 }

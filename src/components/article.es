@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 
 export default class Article extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
   }
-  componentWillMount () {
+  componentWillMount() {
     //
   }
 
   render () {
-    const { index, url, title } = this.props
+    const { index, url, title, createTime } = this.props
     return (
       <article>
         <header className="entry-header">
@@ -25,7 +26,7 @@ export default class Article extends Component {
         }
         <footer className="entry-footer">
           <span className="posted-on">
-            <time dateTime={this.props.pubDate}>{this.props.pubDate}</time>
+            <time dateTime={createTime}>{ moment(createTime).format('LLLL') }</time>
           </span>
         </footer>
       </article>

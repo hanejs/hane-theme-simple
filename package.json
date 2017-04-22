@@ -29,8 +29,10 @@
   "homepage": "https://github.com/hanejs/hane-theme-simple#readme",
   "dependencies": {
     "html-beautify": "^1.0.4",
+    "moment": "^2.18.1",
     "react": "^15.4.0",
-    "react-dom": "^15.4.0"
+    "react-dom": "^15.4.0",
+    "sanitize-html": "^1.14.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
