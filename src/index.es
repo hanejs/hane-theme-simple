@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import ReactDOMServer from 'react-dom/server'
 import htmlBeautify from 'html-beautify'
 
-import Metadata from './components/metadata'
+import Head from './components/head'
 import Layout from './components/layout'
 
 if (!global.hane) {
@@ -23,8 +23,8 @@ class SimpleTheme extends hane.Theme {
   constructor(options = {}) {
     super(options)
   }
-  getMetadata(data) {
-    return <Metadata />
+  getHead(data) {
+    return <Head />
   }
   getLayout(data) {
     return <Layout data={this.data} contentType={this.initialContentType} />
@@ -35,7 +35,7 @@ class SimpleTheme extends hane.Theme {
 
     let html = ReactDOMServer.renderToString(
       <html>
-        {this.getMetadata()}
+        {this.getHead()}
         <body>
         {this.getLayout()}
         </body>
