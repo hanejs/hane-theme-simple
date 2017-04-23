@@ -42,8 +42,33 @@ class Layout extends React.Component {
     return reactElement
   }
 
+  getComments () {
+    const { blog, contentData } = this.state
+    const script = `
+  var disqus_config = function () {
+  this.page.url = ${JSON.stringify(blog.blogUrl + contentData.url)};
+  this.page.identifier = ${JSON.stringify(contentData.slug)};
+  };
+  (function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://tengattack.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  `
+    return (
+      <div id="comments">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: script }}>
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    )
+  }
+
   render () {
-    const { categories, tags, blog } = this.state
+    const { contentType, categories, tags, blog } = this.state
     return (
       <div className="site">
         <div className="site-inner">
@@ -51,6 +76,9 @@ class Layout extends React.Component {
           <div className="site-content">
             <div className="content-area">
               {this.getContent()}
+              {contentType === 'item' &&
+                this.getComments()
+              }
             </div>
             <aside className="sidebar">
               {categories.length > 0 &&

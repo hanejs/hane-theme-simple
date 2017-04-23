@@ -10,8 +10,8 @@ export default class Header extends Component {
       <header className="site-header">
         <div className="site-header-main">
           <div className="site-branding">
-            <a href={blog.publicUrl} title={blog.name}>
-              <h1 className="site-title">{ blog.name }</h1>
+            <a href={blog.publicUrl} title={blog.title}>
+              <h1 className="site-title">{ blog.title }</h1>
             </a>
           </div>
         </div>

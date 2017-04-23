@@ -9,7 +9,7 @@ export default class Head extends React.Component {
     return (
       <head>
         <meta charSet="utf-8" />
-        <title>{ title } - { blog.name }</title>
+        <title>{ title } - { blog.title }</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="generator" content="hanejs" />
