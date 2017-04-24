@@ -14,7 +14,7 @@ export class IndexContent extends Component {
     const { prevUrl, nextUrl } = this.props
     const { items } = this.state
     return (
-      <main className="site-main">
+      <main className="site-main site-article-list">
         {items.map((item, i) => {
           return <Article key={i} {...item} index={true} />
         })}

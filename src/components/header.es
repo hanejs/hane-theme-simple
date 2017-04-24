@@ -5,14 +5,23 @@ export default class Header extends Component {
     //
   }
   render() {
-    const { blog } = this.props
+    const { blog, tabs, activeTab } = this.props
     return (
       <header className="site-header">
         <div className="site-header-main">
           <div className="site-branding">
-            <a href={blog.publicUrl} title={blog.title}>
-              <h1 className="site-title">{ blog.title }</h1>
+            <a className="site-title" href={blog.publicUrl} title={blog.title}>
+              <h1>{ blog.title }</h1>
             </a>
+          </div>
+          <div className="site-tabs">
+            <ul className="site-tab-nav">
+              {tabs.map((t, i) => (
+                <li key={i} className={activeTab === t.slug ? 'active' : undefined}>
+                  <a href={t.url} title={t.title}>{ t.title }</a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </header>

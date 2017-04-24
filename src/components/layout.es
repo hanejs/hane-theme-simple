@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Header from './header'
+import Footer from './footer'
 import {IndexContent, ItemContent} from './content'
 
 class Layout extends React.Component {
@@ -10,9 +11,12 @@ class Layout extends React.Component {
     this.state = {
       blog: data['blog'] || {},
       contentType: props.contentType,
+      activeTab: data['activeTab'],
+      tabs: data['tabs'] || [],
       posts: data['posts'] || [],
       categories: data['categories'] || [],
       tags: data['tags'] || [],
+      links: data['links'] || [],
     }
     switch (this.state.contentType) {
     case 'item':
@@ -68,11 +72,12 @@ class Layout extends React.Component {
   }
 
   render () {
-    const { contentType, categories, tags, blog } = this.state
+    const { contentType, activeTab, tabs, categories, tags, links, blog } = this.state
     return (
       <div className="site">
+        <div id="top"></div>
         <div className="site-inner">
-          <Header blog={blog} />
+          <Header blog={blog} tabs={tabs} activeTab={activeTab} />
           <div className="site-content">
             <div className="content-area">
               {this.getContent()}
@@ -92,15 +97,38 @@ class Layout extends React.Component {
                 </section>
               }
               <section className="widget">
-                <h2 className="widget-title">Tags</h2>
-                <ul>
-                {tags.map((tag, i) => {
-                  return <li key={i}>{tag['name']}</li>
-                })}
-                </ul>
+                <div className="widget-component widget-tags">
+                  <h2 className="widget-title">Tags</h2>
+                  <ul>
+                  {tags.map((tag, i) => {
+                    return (
+                      <li key={i}>
+                        <a target="_blank" href={tag.url} title={tag['name']}>
+                          { tag['name'] }
+                        </a>
+                      </li>
+                    )
+                  })}
+                  </ul>
+                </div>
+                <div className="widget-component widget-links">
+                  <h2 className="widget-title">Links</h2>
+                  <ul className="widget-links">
+                  {links.map((link, i) => {
+                    return (
+                      <li key={i}>
+                        <a target="_blank" href={link.url} title={link.description || undefined}>
+                          { link['name'] }
+                        </a>
+                      </li>
+                    )
+                  })}
+                  </ul>
+                </div>
               </section>
             </aside>
           </div>
+          <Footer blog={blog} />
         </div>
       </div>
     )

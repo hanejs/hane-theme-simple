@@ -14,8 +14,8 @@ export default class Article extends Component {
     return (
       <article>
         <header className="entry-header">
-          <a href={url}>
-            <h2 className="entry-title">{title}</h2>
+          <a className="entry-title" href={url}>
+            <h2>{title}</h2>
           </a>
           <span className="posted-on">
             <time dateTime={createTime}>{ moment(createTime).format('LLLL') }</time>
@@ -25,7 +25,7 @@ export default class Article extends Component {
              dangerouslySetInnerHTML={{ __html: index ? this.props.shortContent : this.props.content }}>
         </div>
         {index &&
-          <a href={url}>...Read More</a>
+          <a className="read-more" href={url}>...Read More</a>
         }
         {/*
           <footer className="entry-footer">
