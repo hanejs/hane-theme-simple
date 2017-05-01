@@ -20,12 +20,12 @@ export class IndexContent extends Component {
         })}
         <ul className="pagination">
           {prevUrl &&
-            <li title="Prev Page">
+            <li className="prev" title="Prev Page">
               <a href={prevUrl}>Prev Page</a>
             </li>
           }
           {nextUrl &&
-            <li title="Next Page">
+            <li className="next" title="Next Page">
               <a href={nextUrl}>Next Page</a>
             </li>
           }
